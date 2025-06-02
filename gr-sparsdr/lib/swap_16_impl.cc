@@ -39,7 +39,7 @@ inline std::uint32_t swap_chunks(std::uint32_t value)
 namespace gr {
 namespace sparsdr {
 
-swap_16::sptr swap_16::make() { return gnuradio::get_initial_sptr(new swap_16_impl()); }
+swap_16::sptr swap_16::make() { return gr::make_block_sptr<swap_16_impl>(); }
 
 /*
  * The private constructor

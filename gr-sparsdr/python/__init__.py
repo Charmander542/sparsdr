@@ -24,8 +24,12 @@ description here (python/__init__.py).
 '''
 from __future__ import unicode_literals
 
-# import swig generated symbols into the sparsdr namespace
-from .sparsdr_swig import *
+# import pybind11 generated symbols into the sparsdr namespace
+try:
+    # this might fail if the module is python-only
+    from .sparsdr_python import *
+except ModuleNotFoundError:
+    pass
 
 # import any pure python here
 #

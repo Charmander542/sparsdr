@@ -56,8 +56,8 @@ reconstruct::sptr reconstruct::make(std::vector<band_spec> bands,
                                     bool zero_gaps,
                                     unsigned int compression_fft_size)
 {
-    return gnuradio::get_initial_sptr(new reconstruct_impl(
-        bands, reconstruct_path, sample_format, zero_gaps, compression_fft_size));
+    return gr::make_block_sptr<reconstruct_impl>(
+        bands, reconstruct_path, sample_format, zero_gaps, compression_fft_size);
 }
 
 /*

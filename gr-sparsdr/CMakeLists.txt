@@ -21,7 +21,7 @@
 ########################################################################
 # Project setup
 ########################################################################
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.16.3)
 project(gr-sparsdr CXX C)
 enable_testing()
 
@@ -45,7 +45,7 @@ list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake/Modules)
 set(VERSION_MAJOR 1)
 set(VERSION_API   0)
 set(VERSION_ABI   0)
-set(VERSION_PATCH git)
+set(VERSION_PATCH 0)
 
 cmake_policy(SET CMP0011 NEW)
 
@@ -62,12 +62,13 @@ if((CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
     add_definitions(-fvisibility=hidden)
 endif()
 
+# Require C++17 for GNU Radio 3.10
 IF(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    SET(CMAKE_CXX_STANDARD 11)
+    SET(CMAKE_CXX_STANDARD 17)
 ELSEIF(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    SET(CMAKE_CXX_STANDARD 11)
+    SET(CMAKE_CXX_STANDARD 17)
 ELSEIF(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    SET(CMAKE_CXX_STANDARD 11)
+    SET(CMAKE_CXX_STANDARD 17)
 ELSE()
     message(WARNING "C++ standard could not be set because compiler is not GNU, Clang or MSVC.")
 ENDIF()
@@ -86,7 +87,7 @@ ENDIF()
 # Install directories
 ########################################################################
 include(FindPkgConfig)
-find_package(Gnuradio "3.8" REQUIRED COMPONENTS uhd blocks)
+find_package(Gnuradio "3.10" REQUIRED COMPONENTS uhd blocks pdu)
 include(GrVersion)
 
 include(GrPlatform) #define LIB_SUFFIX
@@ -155,15 +156,28 @@ add_custom_target(uninstall
 find_package(Boost REQUIRED COMPONENTS chrono serialization)
 
 ########################################################################
+# Python setup and requirements
+########################################################################
+include(GrPython)
+
+########################################################################
 # Add subdirectories
 ########################################################################
 add_subdirectory(include/sparsdr)
 add_subdirectory(lib)
 add_subdirectory(apps)
 add_subdirectory(docs)
-add_subdirectory(swig)
 add_subdirectory(python)
 add_subdirectory(grc)
+
+# Handle Python bindings
+GR_PYTHON_CHECK_MODULE_RAW(
+    "pygccxml"
+    "import pygccxml"
+    PYGCCXML_FOUND
+    )
+
+include(GrPybind)
 
 ########################################################################
 # Install cmake search helper for this library

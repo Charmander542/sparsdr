@@ -46,12 +46,12 @@ combined_usrp_receiver::make(const ::uhd::device_addr_t& device_addr,
                              const std::string& reconstruct_path,
                              bool zero_gaps)
 {
-    return gnuradio::get_initial_sptr(new combined_usrp_receiver_impl(device_addr,
-                                                                      format_version,
-                                                                      center_frequency,
-                                                                      bands,
-                                                                      reconstruct_path,
-                                                                      zero_gaps));
+    return gr::make_block_sptr<combined_usrp_receiver_impl>(device_addr,
+                                                            format_version,
+                                                            center_frequency,
+                                                            bands,
+                                                            reconstruct_path,
+                                                            zero_gaps);
 }
 
 /*

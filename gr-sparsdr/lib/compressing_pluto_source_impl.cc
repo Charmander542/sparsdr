@@ -72,8 +72,7 @@ std::uint32_t ceiling_log2(std::uint32_t value)
 compressing_pluto_source::sptr compressing_pluto_source::make(const std::string& uri,
                                                               std::size_t buffer_size)
 {
-    return gnuradio::get_initial_sptr(
-        new compressing_pluto_source_impl(uri, buffer_size));
+    return gr::make_block_sptr<compressing_pluto_source_impl>(uri, buffer_size);
 }
 
 /*

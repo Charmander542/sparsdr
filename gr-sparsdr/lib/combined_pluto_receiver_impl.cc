@@ -43,13 +43,13 @@ combined_pluto_receiver::make(const std::string& uri,
                               const std::string& reconstruct_path,
                               bool zero_gaps)
 {
-    return gnuradio::get_initial_sptr(new combined_pluto_receiver_impl(uri,
-                                                                       buffer_size,
-                                                                       fft_size,
-                                                                       center_frequency,
-                                                                       bands,
-                                                                       reconstruct_path,
-                                                                       zero_gaps));
+    return gr::make_block_sptr<combined_pluto_receiver_impl>(uri,
+                                                             buffer_size,
+                                                             fft_size,
+                                                             center_frequency,
+                                                             bands,
+                                                             reconstruct_path,
+                                                             zero_gaps);
 }
 
 /*

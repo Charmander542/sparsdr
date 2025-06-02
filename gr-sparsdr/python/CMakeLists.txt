@@ -25,6 +25,7 @@ include(GrPython)
 if(NOT PYTHONINTERP_FOUND)
     return()
 endif()
+add_subdirectory(sparsdr/bindings)
 
 ########################################################################
 # Install python sources
@@ -41,4 +42,4 @@ GR_PYTHON_INSTALL(
 include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-sparsdr)
-set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)
+set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/test_modules)

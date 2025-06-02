@@ -22,12 +22,13 @@
 #ifndef INCLUDED_SPARSDR_COMPRESSING_USRP_SOURCE_H
 #define INCLUDED_SPARSDR_COMPRESSING_USRP_SOURCE_H
 
-#include <gnuradio/hier_block2.h>
+#include <gnuradio/sync_block.h>
 #include <sparsdr/api.h>
 #include <sparsdr/compressing_source.h>
 #include <uhd/types/device_addr.hpp>
 #include <uhd/types/tune_request.hpp>
 #include <uhd/types/tune_result.hpp>
+#include <memory>
 
 namespace gr {
 namespace sparsdr {
@@ -38,11 +39,11 @@ namespace sparsdr {
  * \ingroup sparsdr
  *
  */
-class SPARSDR_API compressing_usrp_source : virtual public gr::hier_block2,
+class SPARSDR_API compressing_usrp_source : virtual public gr::sync_block,
                                             public compressing_source
 {
 public:
-    typedef boost::shared_ptr<compressing_usrp_source> sptr;
+    typedef std::shared_ptr<compressing_usrp_source> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of sparsdr::compressing_usrp_source.
@@ -78,6 +79,20 @@ public:
      * \param ant the antenna string
      */
     virtual void set_antenna(const std::string& ant) = 0;
+
+    virtual void set_compression_enabled(bool enabled) = 0;
+    virtual void set_run_fft(bool enable) = 0;
+    virtual void set_send_fft_samples(bool enable) = 0;
+    virtual void set_send_average_samples(bool enable) = 0;
+    virtual void set_fft_size(std::uint32_t size) = 0;
+    virtual std::uint32_t fft_size() const = 0;
+    virtual void set_shift_amount(std::uint8_t scaling) = 0;
+    virtual void set_bin_threshold(std::uint16_t index, std::uint32_t threshold) = 0;
+    virtual void set_bin_window_value(std::uint16_t bin_index, std::uint16_t value) = 0;
+    virtual void set_bin_mask(std::uint16_t bin_index) = 0;
+    virtual void clear_bin_mask(std::uint16_t bin_index) = 0;
+    virtual void set_average_weight(float weight) = 0;
+    virtual void set_average_interval(std::uint32_t interval) = 0;
 };
 
 } // namespace sparsdr

@@ -56,7 +56,7 @@ namespace registers = gr::sparsdr::detail::registers;
 compressing_usrp_source::sptr
 compressing_usrp_source::make(const ::uhd::device_addr_t& device_addr)
 {
-    return gnuradio::get_initial_sptr(new compressing_usrp_source_impl(device_addr));
+    return gr::make_block_sptr<compressing_usrp_source_impl>(device_addr);
 }
 
 /*

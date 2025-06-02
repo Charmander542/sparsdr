@@ -51,15 +51,14 @@ simple_combined_usrp_receiver::make(const ::uhd::device_addr_t& device_addr,
                                     bool zero_gaps,
                                     bool skip_bin_config)
 {
-    return gnuradio::get_initial_sptr(
-        new simple_combined_usrp_receiver_impl(device_addr,
-                                               format_version,
-                                               center_frequency,
-                                               bands,
-                                               threshold,
-                                               reconstruct_path,
-                                               zero_gaps,
-                                               skip_bin_config));
+    return gr::make_block_sptr<simple_combined_usrp_receiver_impl>(device_addr,
+                                                                   format_version,
+                                                                   center_frequency,
+                                                                   bands,
+                                                                   threshold,
+                                                                   reconstruct_path,
+                                                                   zero_gaps,
+                                                                   skip_bin_config);
 }
 
 /*
