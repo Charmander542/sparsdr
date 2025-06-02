@@ -87,7 +87,7 @@ ENDIF()
 # Install directories
 ########################################################################
 include(FindPkgConfig)
-find_package(Gnuradio "3.10" REQUIRED COMPONENTS uhd blocks pdu)
+find_package(Gnuradio "3.10" REQUIRED COMPONENTS blocks pdu)
 include(GrVersion)
 
 include(GrPlatform) #define LIB_SUFFIX

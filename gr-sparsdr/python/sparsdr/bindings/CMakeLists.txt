@@ -66,7 +66,6 @@ target_link_libraries(sparsdr_python
     gnuradio::gnuradio-runtime
     gnuradio::gnuradio-blocks
     gnuradio::gnuradio-pdu
-    gnuradio::gnuradio-uhd
     sparsdr
 )
 

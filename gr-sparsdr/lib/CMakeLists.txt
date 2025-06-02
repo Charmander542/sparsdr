@@ -23,7 +23,6 @@
 # Find library dependencies
 ########################################################################
 
-find_package(UHD REQUIRED)
 find_package(IIO REQUIRED)
 
 ########################################################################
@@ -57,10 +56,10 @@ endif(NOT sparsdr_sources)
 
 add_library(gnuradio-sparsdr SHARED ${sparsdr_sources})
 target_link_libraries(gnuradio-sparsdr
+    PRIVATE
     gnuradio::gnuradio-runtime
-    gnuradio::gnuradio-uhd
     gnuradio::gnuradio-blocks
-    UHD::uhd
+    gnuradio::gnuradio-pdu
     IIO::IIO
 )
 target_include_directories(gnuradio-sparsdr
