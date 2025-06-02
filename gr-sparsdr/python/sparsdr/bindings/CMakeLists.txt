@@ -28,22 +28,7 @@ include(GrPybind)
 # Python Bindings
 ########################################################################
 
-set(sparsdr_python_files
-    band_spec_python.cc
-    simple_band_spec_python.cc
-    reconstruct_python.cc
-    compressing_usrp_source_python.cc
-    compressing_pluto_source_python.cc
-    iio_device_source_python.cc
-    swap_16_python.cc
-    combined_usrp_receiver_python.cc
-    combined_pluto_receiver_python.cc
-    simple_combined_pluto_receiver_python.cc
-    simple_combined_usrp_receiver_python.cc
-    compressing_source_python.cc
-    python_bindings.cc)
-
-# Set the source files for the bindings
+# Define the source files with full paths
 set(sparsdr_python_sources
     ${CMAKE_CURRENT_SOURCE_DIR}/band_spec_python.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/simple_band_spec_python.cc
@@ -59,10 +44,43 @@ set(sparsdr_python_sources
     ${CMAKE_CURRENT_SOURCE_DIR}/compressing_source_python.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/python_bindings.cc)
 
-GR_PYBIND_MAKE_OOT(sparsdr
-   ../../..
-   gr::sparsdr
-   "${sparsdr_python_sources}")
+# Ensure the source files exist
+foreach(source ${sparsdr_python_sources})
+    if(NOT EXISTS ${source})
+        message(FATAL_ERROR "Source file ${source} does not exist")
+    endif()
+endforeach()
+
+# Create the Python module
+pybind11_add_module(sparsdr_python ${sparsdr_python_sources})
+
+# Set the target properties
+set_target_properties(sparsdr_python PROPERTIES
+    OUTPUT_NAME "sparsdr"
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/python/sparsdr
+)
+
+# Link against GNU Radio libraries
+target_link_libraries(sparsdr_python
+    PRIVATE
+    gnuradio::gnuradio-runtime
+    gnuradio::gnuradio-blocks
+    gnuradio::gnuradio-pdu
+    gnuradio::gnuradio-uhd
+    sparsdr
+)
+
+# Include directories
+target_include_directories(sparsdr_python
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/lib
+)
+
+# Install the Python module
+install(TARGETS sparsdr_python
+    LIBRARY DESTINATION ${GR_PYTHON_DIR}/sparsdr
+)
 
 # copy bindings extension for use in QA tests
 add_custom_command(TARGET sparsdr_python POST_BUILD
