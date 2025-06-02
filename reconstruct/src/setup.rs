@@ -19,11 +19,11 @@ use std::fs::{self, File};
 use std::io::{self, BufReader, BufWriter, Read, Result, Write};
 
 use log::debug;
-use simplelog::LevelFilter;
+//use simplelog::LevelFilter;
 
 use sparsdr_reconstruct::steps::overlap::OverlapMode;
 
-use crate::args::CompressedFormat;
+//use crate::args::CompressedFormat;
 
 use super::args::Args;
 use super::args::BandArgs;
@@ -38,7 +38,7 @@ pub struct Setup {
     /// Size of the source file in bytes, if known
     pub source_length: Option<u64>,
     /// Log level
-    pub log_level: LevelFilter,
+ //   pub log_level: LevelFilter,
     /// Bandwidth used to create the compressed data
     pub compressed_bandwidth: f32,
     /// Size of the FFT used for compression
@@ -46,7 +46,7 @@ pub struct Setup {
     /// The number of bits in the window timestamp counter
     pub timestamp_bits: u32,
     /// The compressed sample format
-    pub sample_format: CompressedFormat,
+ //   pub sample_format: CompressedFormat,
     /// Bands to decompress
     pub bands: Vec<BandSetup>,
     /// Flag to enable progress bar
@@ -111,11 +111,11 @@ impl Setup {
         Ok(Setup {
             source,
             source_length,
-            log_level: args.log_level,
+            //log_level: args.log_level,
             compressed_bandwidth: args.compressed_bandwidth,
             compression_fft_size: args.compression_fft_size,
             timestamp_bits: args.timestamp_bits,
-            sample_format: args.sample_format,
+            //sample_format: args.sample_format,
             bands,
             progress_bar: args.progress_bar,
             channel_capacity: args.channel_capacity,
