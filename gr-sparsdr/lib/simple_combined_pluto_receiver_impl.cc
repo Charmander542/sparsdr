@@ -51,7 +51,7 @@ simple_combined_pluto_receiver::make(const std::string& uri,
                                      bool zero_gaps,
                                      bool skip_bin_config)
 {
-    return gr::make_block_sptr<simple_combined_pluto_receiver_impl>(uri,
+    return gnuradio::make_block_sptr<simple_combined_pluto_receiver_impl>(uri,
                                                                     buffer_size,
                                                                     center_frequency,
                                                                     bands,
