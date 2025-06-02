@@ -50,6 +50,13 @@ This document tracks the migration progress from GNU Radio 3.8 to 3.10.
   - ✅ `combined_usrp_receiver_impl.cc`
   - ✅ `combined_pluto_receiver_impl.cc`
 
+### 5. Boost Modernization and Removal
+- ✅ Replaced `boost::lexical_cast` with `std::to_string()` and `std::stoul()` in all files
+- ✅ Replaced `boost::noncopyable` with deleted copy constructor/assignment in `reconstruct_impl.h`
+- ✅ Removed unused `boost::make_shared` include from `endian_converter.cc`
+- ✅ **Completely removed Boost dependency** from CMakeLists.txt (only header-only Boost.Test remains for unit tests)
+- ✅ Modernized code to use C++17 standard library instead of Boost equivalents
+
 ## Remaining Work
 
 ### 1. Additional Header Updates (if needed)

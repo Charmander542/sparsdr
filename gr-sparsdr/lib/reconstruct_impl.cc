@@ -30,10 +30,10 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <boost/lexical_cast.hpp>
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
+#include <string>
 
 namespace gr {
 namespace sparsdr {
@@ -102,7 +102,7 @@ void reconstruct_impl::start_subprocess(const std::string& sample_format,
 
     // Sample format and compression FFT size
     arguments.push_back("--compression-fft-size");
-    arguments.push_back(boost::lexical_cast<std::string>(compression_fft_size));
+    arguments.push_back(std::to_string(compression_fft_size));
     if (sample_format == "N210 v1") {
         arguments.push_back("--compressed-bandwidth");
         arguments.push_back("100e6");

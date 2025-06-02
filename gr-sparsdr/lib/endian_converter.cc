@@ -1,5 +1,4 @@
 #include "endian_converter.h"
-#include <boost/make_shared.hpp>
 #include <cstdint>
 
 namespace gr {

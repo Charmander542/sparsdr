@@ -23,15 +23,18 @@
 
 #include <sparsdr/reconstruct.h>
 #include <unistd.h>
-#include <boost/noncopyable.hpp>
 
 namespace gr {
 namespace sparsdr {
 
-// Inherit from noncopyable to prevent copying d_child
-class reconstruct_impl : public reconstruct, public boost::noncopyable
+// Make class non-copyable using C++11+ deleted functions
+class reconstruct_impl : public reconstruct
 {
 private:
+    // Delete copy constructor and assignment operator
+    reconstruct_impl(const reconstruct_impl&) = delete;
+    reconstruct_impl& operator=(const reconstruct_impl&) = delete;
+
     /*! \brief Path to the sparsdr_reconstruct executable */
     std::string d_reconstruct_path;
     /*! \brief The bands to decompress */

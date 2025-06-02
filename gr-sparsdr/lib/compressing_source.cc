@@ -1,8 +1,8 @@
 #include "threshold_file.h"
 #include "window.h"
 #include <sparsdr/compressing_source.h>
-#include <boost/lexical_cast.hpp>
 #include <stdexcept>
+#include <string>
 
 namespace gr {
 namespace sparsdr {
@@ -30,22 +30,22 @@ public:
         const auto dots_index = before_colon.find("..");
         if (dots_index == std::string::npos) {
             // Just one number
-            const std::uint16_t bin = boost::lexical_cast<std::uint16_t>(before_colon);
+            const std::uint16_t bin = static_cast<std::uint16_t>(std::stoul(before_colon));
             start_bin = bin;
             end_bin = bin + 1;
         } else {
             const auto before_dots = before_colon.substr(0, dots_index);
             const auto after_dots = before_colon.substr(
                 dots_index + 2, before_colon.length() - dots_index - 2);
-            start_bin = boost::lexical_cast<std::uint16_t>(before_dots);
-            end_bin = boost::lexical_cast<std::uint16_t>(after_dots);
+            start_bin = static_cast<std::uint16_t>(std::stoul(before_dots));
+            end_bin = static_cast<std::uint16_t>(std::stoul(after_dots));
         }
 
         if (start_bin >= fft_size || end_bin > fft_size) {
             throw std::invalid_argument("Bin number too large");
         }
 
-        const std::uint32_t threshold = boost::lexical_cast<std::uint32_t>(after_colon);
+        const std::uint32_t threshold = std::stoul(after_colon);
         return bin_range{ start_bin, end_bin, threshold };
     }
 };

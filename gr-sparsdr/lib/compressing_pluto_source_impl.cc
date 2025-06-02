@@ -26,7 +26,6 @@
 #include <gnuradio/io_signature.h>
 
 #include <sparsdr/iio_device_source.h>
-#include <boost/lexical_cast.hpp>
 #include <cmath>
 #include <cstring>
 #include <iostream>
@@ -101,8 +100,7 @@ compressing_pluto_source_impl::compressing_pluto_source_impl(const std::string& 
     const char* const format_version_string =
         iio_context_get_attr_value(d_iio_context, "sparsdr_format_version");
     if (format_version_string) {
-        d_format_version = boost::lexical_cast<unsigned int>(
-            format_version_string, std::strlen(format_version_string));
+        d_format_version = std::stoul(format_version_string, nullptr, 0);
     } else {
         std::cerr << "IIO context does not have a sparsdr_format_version attribute. "
                   << "Check that the correct SparSDR image is loaded.\n";
