@@ -33,8 +33,6 @@ include(GrPlatform) #define LIB_SUFFIX
 list(APPEND sparsdr_sources
     combined_common.cc
     combined_pluto_receiver_impl.cc
-    combined_usrp_receiver_impl.cc
-    compressing_usrp_source_impl.cc
     compressing_pluto_source_impl.cc
     compressing_source.cc
     endian_converter.cc
@@ -42,7 +40,6 @@ list(APPEND sparsdr_sources
     iio_device_source_impl.cc
     reconstruct_impl.cc
     simple_combined_pluto_receiver_impl.cc
-    simple_combined_usrp_receiver_impl.cc
     swap_16_impl.cc
     threshold_file.cc
     window.cc
