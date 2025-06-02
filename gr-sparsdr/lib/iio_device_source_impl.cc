@@ -32,7 +32,7 @@ iio_device_source::sptr iio_device_source::make(iio_device* device,
                                                 const std::string& channel,
                                                 std::size_t buffer_size_samples)
 {
-    return gr::make_block_sptr<iio_device_source_impl>(device, channel, buffer_size_samples);
+    return gnuradio::make_block_sptr<iio_device_source_impl>(device, channel, buffer_size_samples);
 }
 
 /*
