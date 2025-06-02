@@ -33,14 +33,11 @@ set(sparsdr_python_sources
     ${CMAKE_CURRENT_SOURCE_DIR}/band_spec_python.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/simple_band_spec_python.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/reconstruct_python.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/compressing_usrp_source_python.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/compressing_pluto_source_python.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/iio_device_source_python.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/swap_16_python.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/combined_usrp_receiver_python.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/combined_pluto_receiver_python.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/simple_combined_pluto_receiver_python.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/simple_combined_usrp_receiver_python.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/compressing_source_python.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/python_bindings.cc)
 
@@ -66,7 +63,7 @@ target_link_libraries(sparsdr_python
     gnuradio::gnuradio-runtime
     gnuradio::gnuradio-blocks
     gnuradio::gnuradio-pdu
-    sparsdr
+    gnuradio-sparsdr
 )
 
 # Include directories

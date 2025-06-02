@@ -19,8 +19,9 @@ void bind_compressing_pluto_source(py::module& m)
 {
     using compressing_pluto_source = ::gr::sparsdr::compressing_pluto_source;
 
-    py::class_<compressing_pluto_source, gr::sync_block,
-            std::shared_ptr<compressing_pluto_source>> (m, "compressing_pluto_source")
+    py::class_<compressing_pluto_source, gr::hier_block2,
+           std::shared_ptr<compressing_pluto_source>>(m, "compressing_pluto_source")
+
 
         .def(py::init(&compressing_pluto_source::make))
         ;

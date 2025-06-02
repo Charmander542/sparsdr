@@ -3,6 +3,7 @@
 #include <sparsdr/compressing_source.h>
 #include <stdexcept>
 #include <string>
+#include <cassert>
 
 namespace gr {
 namespace sparsdr {
