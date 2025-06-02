@@ -28,7 +28,7 @@ include(GrPybind)
 # Python Bindings
 ########################################################################
 
-list(APPEND sparsdr_python_files
+set(sparsdr_python_files
     band_spec_python.cc
     simple_band_spec_python.cc
     reconstruct_python.cc
@@ -43,10 +43,26 @@ list(APPEND sparsdr_python_files
     compressing_source_python.cc
     python_bindings.cc)
 
+# Set the source files for the bindings
+set(sparsdr_python_sources
+    ${CMAKE_CURRENT_SOURCE_DIR}/band_spec_python.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/simple_band_spec_python.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/reconstruct_python.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/compressing_usrp_source_python.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/compressing_pluto_source_python.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/iio_device_source_python.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/swap_16_python.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/combined_usrp_receiver_python.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/combined_pluto_receiver_python.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/simple_combined_pluto_receiver_python.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/simple_combined_usrp_receiver_python.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/compressing_source_python.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/python_bindings.cc)
+
 GR_PYBIND_MAKE_OOT(sparsdr
    ../../..
    gr::sparsdr
-   "${sparsdr_python_files}")
+   "${sparsdr_python_sources}")
 
 # copy bindings extension for use in QA tests
 add_custom_command(TARGET sparsdr_python POST_BUILD
